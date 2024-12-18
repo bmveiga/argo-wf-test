@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: test-cron-wf
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: "Replace"
+  startingDeadlineSeconds: 0
+  workflowSpec:
+    entrypoint: test
+    templates:
+      - name: test
+        container:
+          image: 'bmveiga/argo-wf-app:3.0'
+          args: ["myMethod"]
